@@ -4,6 +4,7 @@ class More_less:
 
     def invert(self, a, b):
         '''Returns two integers inverted.'''
+
         return (b, a)
 
     def get_int(self, question):
@@ -21,12 +22,22 @@ class More_less:
     def get_range(self):
         '''Asks the user the range of integers to guess.'''
 
-        self.min = self.get_int('Enter the value of X: ')
-        self.max = self.get_int('Enter the value of Y: ')
+        self.min = self.get_int('\nEnter the value of X: ')
+        self.max = self.get_int('\nEnter the value of Y: ')
 
         if self.min > self.max:
             print('You inputed X as greater than Y, I will invert them.')
             self.min, self.max = self.invert(self.min, self.max)
+
+
+    def start_menu(self):
+        '''Shows the start menu of the game.'''
+        
+        print('Hello and welcome to the More/Less game !')
+        print('In this game, you will enter two integers X and Y,')
+        print('and then think about an integer between X and Y.')
+        print('I will try to guess it, and you tell me if it\'s your')
+        print('number is higher, lower, or equal to mine !')
 
 
     def start_guess(self):
@@ -38,10 +49,10 @@ class More_less:
             next = int(self.min + (self.max-self.min) // 2)
 
             if previous == next:
-                print('Hey ! You scammed me !')
+                print('\nHey ! You scammed me !')
                 return False
             
-            print(f'Are you thinking of {next}?')
+            print(f'\nAre you thinking of {next}?')
             answer = input('Answer \'+\' or \'-\' or \'=\' : ')
             
             if answer == '+':
@@ -52,34 +63,31 @@ class More_less:
                 print('Wrong input.')
             previous = next
         
-        print('Yay !')
+        print('\nYay !')
         return True
 
 
     def play(self):
         '''Launches the game'''
 
-        print('Hello and welcome to the More/Less game !')
-        print('In this game, you will enter two integers X and Y, and then think about an integer between X and Y.')
-        print('I will try to guess it, and you tell me if it\'s your number is higher, lower, or equal to mine !')
-        
+        self.start_menu()        
         self.get_range()
-        
-        print(f'Think about an integer from {self.min} to {self.max}. I will try to guess it !')
+        print(f'\nThink about an integer from {self.min} to {self.max}. I will try to guess it !')
         answer = ''
 
         while answer not in ['0', '1']:
             answer = input('\nEnter 1 to start, 0 to quit: ')
+
             if answer == '1':
                 endgame = self.start_guess()
 
                 if endgame:
-                    print('Thanks for the fun !')
+                    print('\nThanks for the fun !')
                 else:
-                    print('Thanks tho, is was still fun !')
+                    print('\nThanks tho, is was still fun !')
 
             elif answer == '0':
-                print('Hope to see you soon !')
+                print('\nHope to see you soon !')
 
             else:
                 print('Wrong input.')
